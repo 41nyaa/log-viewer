@@ -1,19 +1,24 @@
 import React from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { render } from 'react-dom'
-import { GlobalStyle } from './styles/GlobalStyle'
 
-import Greetings from './components/Greetings'
+import Viewer from './components/Viewer/Index'
+import { filterReducer } from './reducer/Reducer'
+import Sidebar from './components/Sidebar/Index'
 
 const mainElement = document.createElement('div')
 mainElement.setAttribute('id', 'root')
 document.body.appendChild(mainElement)
 
-const App = () => {
+const store = createStore(filterReducer)
+
+const App: React.FC = () => {
   return (
-    <>
-      <GlobalStyle />
-      <Greetings />
-    </>
+    <Provider store={store}>
+      <Viewer />
+      <Sidebar />
+    </Provider>
   )
 }
 
